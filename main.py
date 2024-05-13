@@ -4,6 +4,7 @@ pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Asteroid Shooter')
+clock = pygame.time.Clock()
 
 #importing images
 ship_surf = pygame.image.load('graphics/ship.png').convert_alpha()
@@ -22,6 +23,9 @@ while True: #Run forever -> Keeps the game running
             pygame.quit()
             sys.exit
    
+    #framerate limit
+    clock.tick(60)
+
     # 2. Updates
     display_surface.fill((0,0,0))
     display_surface.blit(background, (0,0))
