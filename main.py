@@ -9,7 +9,6 @@ clock = pygame.time.Clock()
 #importing images
 ship_surf = pygame.image.load('graphics/ship.png').convert_alpha()
 ship_rect = ship_surf.get_rect(center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-
 background = pygame.image.load('graphics/background.png').convert()
 
 #import text
@@ -24,16 +23,17 @@ while True: #Run forever -> Keeps the game running
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit
-   
+      
     #framerate limit
     clock.tick(60)
 
+    #mouse input
+    ship_rect.center = pygame.mouse.get_pos()
+
+
     # 2. Updates
     display_surface.fill((0,0,0))
-    display_surface.blit(background, (0,0))
-    
-    if ship_rect.top > 0:
-        ship_rect.y -= 4     
+    display_surface.blit(background, (0,0))   
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(text_surf, text_rect)
 
