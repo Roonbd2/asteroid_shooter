@@ -15,11 +15,12 @@ background = pygame.image.load('graphics/background.png').convert()
 # laser import
 laser_surf = pygame.image.load('graphics/laser.png').convert_alpha()
 laser_rect = laser_surf.get_rect(midbottom = ship_rect.midtop)
-
 # text import
 font = pygame.font.Font('graphics/subatomic.ttf', 50) 
 text_surf = font.render('Space', True, "White")
 text_rect = text_surf.get_rect(midbottom = (WINDOW_WIDTH / 2, WINDOW_HEIGHT - 80))
+
+test_rect = pygame.Rect(100,200,400,500)
 
 #Keeps the code going
 while True: #Run forever -> Keeps the game running
@@ -40,10 +41,13 @@ while True: #Run forever -> Keeps the game running
 
     # drawing
     display_surface.fill((0,0,0))
-    display_surface.blit(background, (0,0))   
-    display_surface.blit(ship_surf, ship_rect)
+    display_surface.blit(background, (0,0))
+
     display_surface.blit(text_surf, text_rect)
+    pygame.draw.rect(display_surface, 'white', text_rect.inflate(30, 10), width = 2, border_radius = 5)
+    
     display_surface.blit(laser_surf, laser_rect)
+    display_surface.blit(ship_surf, ship_rect)
 
     # draw the final frame
     pygame.display.update()
