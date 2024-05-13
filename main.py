@@ -8,12 +8,14 @@ clock = pygame.time.Clock()
 
 #importing images
 ship_surf = pygame.image.load('graphics/ship.png').convert_alpha()
-ship_y_pos = 500
+ship_rect = ship_surf.get_rect(center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+
 background = pygame.image.load('graphics/background.png').convert()
 
 #import text
 font = pygame.font.Font('graphics/subatomic.ttf', 50) 
 text_surf = font.render('Space', True, "White")
+text_rect = text_surf.get_rect(midbottom = (WINDOW_WIDTH / 2, WINDOW_HEIGHT - 80))
 
 #Keeps the code going
 while True: #Run forever -> Keeps the game running
@@ -29,9 +31,11 @@ while True: #Run forever -> Keeps the game running
     # 2. Updates
     display_surface.fill((0,0,0))
     display_surface.blit(background, (0,0))
-    ship_y_pos -= 1
-    display_surface.blit(ship_surf, (300,ship_y_pos))
-    display_surface.blit(text_surf, (500,200))
+    
+    if ship_rect.top > 0:
+        ship_rect.y -= 4     
+    display_surface.blit(ship_surf, ship_rect)
+    display_surface.blit(text_surf, text_rect)
 
     # 3. Show the frame to the player / update the display surface
     pygame.display.update()
