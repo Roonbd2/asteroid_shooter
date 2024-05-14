@@ -58,6 +58,11 @@ can_shoot = True
 shoot_time = None
 # text import
 font = pygame.font.Font('graphics/subatomic.ttf', 50)
+# sound import
+laser_sound = pygame.mixer.Sound('sounds/laser.ogg')
+explosion_sound = pygame.mixer.Sound('sounds/explosion.wav')
+background_music = pygame.mixer.Sound('sounds/music.wav')
+background_music.play(loops = -1)
 
 #meteor timer
 meteor_timer = pygame.event.custom_type()
@@ -78,6 +83,8 @@ while True: #Run forever -> Keeps the game running
             #timer logic
             can_shoot = False
             shoot_time = pygame.time.get_ticks()
+            #play laser sound
+            laser_sound.play()
         #meteor spawn timer
         if event.type == meteor_timer:
             #random position
@@ -113,6 +120,7 @@ while True: #Run forever -> Keeps the game running
     for laser_rect in laser_list:
         for meteor_tuple in meteor_list:
             if laser_rect.colliderect(meteor_tuple[0]):
+                explosion_sound.play()
                 meteor_list.remove(meteor_tuple)
                 laser_list.remove(laser_rect)
     
